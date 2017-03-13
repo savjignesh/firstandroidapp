@@ -148,6 +148,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 		Illuminate\Notifications\NotificationServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -159,6 +160,7 @@ return [
         App\Providers\BroadcastServiceProvider::class,
 	
 		Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class
+        
     ],
 
     /*
@@ -206,7 +208,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 		'Notifiaction' => Illuminate\Support\Facades\Notification::class,
 
-		'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class
+		'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class
     ],
 
 ];

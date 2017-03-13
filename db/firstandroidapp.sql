@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2017 at 02:50 AM
+-- Generation Time: Mar 13, 2017 at 05:19 AM
 -- Server version: 5.7.11
 -- PHP Version: 5.6.19
 
@@ -19,6 +19,65 @@ SET time_zone = "+00:00";
 --
 -- Database: `firstandroidapp`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts`
+--
+
+CREATE TABLE `accounts` (
+  `id` int(11) NOT NULL,
+  `domain` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text,
+  `meta` varchar(255) DEFAULT NULL,
+  `address1` varchar(255) DEFAULT NULL,
+  `address2` varchar(255) DEFAULT NULL,
+  `state` varchar(51) DEFAULT NULL,
+  `city` varchar(51) DEFAULT NULL,
+  `zip` int(11) DEFAULT NULL,
+  `latitude` float DEFAULT NULL,
+  `longitude` float DEFAULT NULL,
+  `isActive` tinyint(4) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`id`, `domain`, `name`, `description`, `meta`, `address1`, `address2`, `state`, `city`, `zip`, `latitude`, `longitude`, `isActive`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'test.com', 'test', 'test account', 'test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-03-05 23:09:42', '2017-03-05 23:09:42', '2017-03-05 23:09:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `items`
+--
+
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text,
+  `type` enum('product','service') NOT NULL,
+  `meta` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`id`, `account_id`, `user_id`, `category_id`, `name`, `description`, `type`, `meta`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 1, 1, 'test first item', 'item', 'product', NULL, '2017-03-13 02:51:32', '2017-03-13 02:51:32', '2017-03-13 02:51:32');
 
 -- --------------------------------------------------------
 
@@ -60,6 +119,7 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
+  `account_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -72,12 +132,24 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@mail.com', '$2y$10$/TdCaHQ5rgtReqVeLVFxkOa5wbUTjrWbp4IjRF8ByBGQBOQNTz/S.', NULL, '2017-02-12 10:48:51', '2017-02-12 10:48:51');
+INSERT INTO `users` (`id`, `account_id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 1, 'admin', 'admin@mail.com', '$2y$10$/TdCaHQ5rgtReqVeLVFxkOa5wbUTjrWbp4IjRF8ByBGQBOQNTz/S.', '7yMH97GCYc7sAktyWZ7jrrjGHSPOox64vqjI44JW7B0vWUtmfvCHbntYtRd0', '2017-02-12 10:48:51', '2017-03-11 02:57:05');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `items`
+--
+ALTER TABLE `items`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -103,6 +175,16 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `items`
+--
+ALTER TABLE `items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
